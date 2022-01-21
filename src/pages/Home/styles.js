@@ -27,8 +27,10 @@ export const FormContainer = styled.form`
 export const FormFieldset = styled.fieldset`
   padding: 1rem;
   background-color: ${({theme}) => theme.itemBackground};
+  box-shadow: 0 5px ${({theme}) => theme.darkItemBackground};
+  border-radius: 16px;
   border: none;
-  margin-bottom: 1rem;
+  margin-bottom: 1.3rem;
   p {
     font-size: 1rem;
     text-align: center;
