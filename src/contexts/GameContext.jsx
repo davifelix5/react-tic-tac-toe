@@ -105,25 +105,6 @@ export function GameContextProvider({ children }) {
     
   }, [currentPlayer, playMode, firstPlayer])
 
-  useEffect(() => {
-
-    const gameOver = plays.filter(Boolean).length === 9
-    const winner = verifyWinner()
-
-    if (winner) {
-      incrementPoints(winner)
-      setWinner(winner)
-    } else if (gameOver) {
-      tie()
-    }
-
-    if (gameOver || winner) {
-      setGameFinished(true)
-    }
-
-
-  }, [plays])
-
   return (
     <GameContext.Provider value={{
       plays, points, currentPlayer, winningIndexes,
