@@ -9,18 +9,27 @@ import {
   Title
 } from './styles'
 
-export function ConfirmModal() {
+export function ConfirmModal({ show, onClose, onConfirm }) {
+
+  function acceptModal() {
+    onClose()
+    onConfirm()
+  }
 
   return (
     <Modal 
-      isOpen={true}
+      isOpen={show}
       overlayElement={(props, contentElement) => <ModalOverlay>{contentElement}</ModalOverlay>}
       contentElement={(props, children) => <ModalContent>{children}</ModalContent>}
+      onRequestClose={onClose}
+      shouldCloseOnOverlayClick={true}
+      shouldCloseOnEsc={true}
+      ariaHideApp={false}
     >
       <Title>Restar Game?</Title>
       <ButtonContainer>
-        <Button>No, cancel</Button>
-        <Button>Yes, restart</Button>
+        <Button onClick={onClose}>No, cancel</Button>
+        <Button onClick={acceptModal}>Yes, restart</Button>
       </ButtonContainer>
     </Modal>
   )

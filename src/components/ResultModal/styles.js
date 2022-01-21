@@ -26,7 +26,7 @@ export const ModalContent = styled.div`
 `
 
 export const Subtitle = styled.h2`
-  color: ${({theme}) => theme.secondaryBackground};
+  color: ${(props) => props.color};
   font-size: 0.8rem;
   @media (max-width: 500px) {
     font-size: 1.2rem;
@@ -38,7 +38,7 @@ export const Title = styled.h1`
   align-items: center;
   justify-content: center;
   color: ${props => props.color};
-  margin: 0.2rem 0 1rem;
+  margin: 0.5rem 0 1rem;
   svg {
     margin-right: 1rem;
   }

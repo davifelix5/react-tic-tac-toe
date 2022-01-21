@@ -14,9 +14,7 @@ import { FaTimes, FaDotCircle } from 'react-icons/fa'
 
 import { ThemeContext } from 'styled-components'
 
-export function ResultModal() {
-
-  const winner = 'O'
+export function ResultModal({isOpen, winner, onQuit, onNextRound}) {
 
   const {
     colorX,
@@ -28,21 +26,26 @@ export function ResultModal() {
   } = useContext(ThemeContext)
 
   const mainColor = winner === 'X' ? colorX : colorO
-  const buttonColor = winner === 'X' ? colorO : colorX
-  const darkColor = winner === 'X' ? darkColorO : darkColorX
+  const buttonColor = winner === 'O' ? colorX : colorO
+  const darkColor = winner === 'O' ? darkColorX : darkColorO
   const Icon = winner === 'X' ? FaTimes : FaDotCircle
-
   return (
     <Modal 
-      isOpen={true}
+      isOpen={isOpen}
       overlayElement={(props, contentElement) => <ModalOverlay>{contentElement}</ModalOverlay>}
       contentElement={(props, children) => <ModalContent>{children}</ModalContent>}
+      ariaHideApp={false}
+      onRequestClose={onQuit}
     >
-      <Subtitle>You won</Subtitle>
-      <Title color={mainColor}><Icon size={50} /> <span>takes the round</span></Title>
+      <Subtitle color={winner ? secondaryBackground: colorX}>Game Over</Subtitle>
+      {winner ? (
+        <Title color={mainColor}><Icon size={50} /> <span>takes the round</span></Title>
+      ) : (
+        <Title color={secondaryBackground}>Houve um empate</Title>
+      )}
       <ButtonContainer>
-        <Button color={secondaryBackground} darkColor={darkSecondaryBackground}>Quit</Button>
-        <Button color={buttonColor} darkColor={darkColor}>Next Round</Button>
+        <Button onClick={onQuit} color={secondaryBackground} darkColor={darkSecondaryBackground}>Quit</Button>
+        <Button onClick={onNextRound} color={buttonColor} darkColor={darkColor}>Next Round</Button>
       </ButtonContainer>
     </Modal>
   )

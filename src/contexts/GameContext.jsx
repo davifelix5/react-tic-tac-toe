@@ -13,6 +13,9 @@ export function GameContextProvider({ children }) {
   const [playMode, setPlayMode] = useState('player') // player || CPU
   const [currentPlayer, setCurrentPlayer] = useState('X')
 
+  const [gameFinished, setGameFinished] = useState(false)
+  const [winner, setWinner] = useState(null) // X or O
+
   function handlePlay(position) {
     if (plays[position]) {
       return;
@@ -27,9 +30,8 @@ export function GameContextProvider({ children }) {
   }
 
   function resetGame() {
-    setPlays(initialPlays)
+    resetRound()
     setPoints(initialPoints)
-    setCurrentPlayer('X')
   }
 
   function incrementPoints (play) {
@@ -59,6 +61,13 @@ export function GameContextProvider({ children }) {
 
   }
 
+  function resetRound() {
+    setPlays(initialPlays)
+    setCurrentPlayer('X')
+    setGameFinished(false)
+    setWinner(null)
+  }
+
   useEffect(() => {
     const agaistCpu = playMode === 'CPU'
     const isCPUTurn = currentPlayer !== firstPlayer
@@ -85,17 +94,15 @@ export function GameContextProvider({ children }) {
 
     if (winner) {
       incrementPoints(winner)
-
-      alert(`${winner} ganhou`)
-
+      setWinner(winner)
     } else if (gameOver) {
       tie()
     }
 
     if (gameOver || winner) {
-      setPlays(initialPlays)
-      setCurrentPlayer('X')
+      setGameFinished(true)
     }
+
 
   }, [plays])
 
@@ -103,7 +110,8 @@ export function GameContextProvider({ children }) {
     <GameContext.Provider value={{
       plays, points, currentPlayer,
       setFirstPlayer, setPlayMode,
-      handlePlay, resetGame
+      winner, gameFinished,
+      handlePlay, resetGame, resetRound
     }}>
       {children}
     </GameContext.Provider>

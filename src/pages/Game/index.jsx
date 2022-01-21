@@ -1,4 +1,5 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 import {
   Container,
@@ -11,22 +12,28 @@ import {
 import { Logo } from '../../components/Logo'
 import { Play } from '../../components/Play'
 
+
 import { FaDotCircle, FaTimes, FaUndo } from 'react-icons/fa'
 
 import { ThemeContext } from 'styled-components'
 import { GameContext } from '../../contexts/GameContext'
+import { ConfirmModal } from '../../components/ConfirmModal'
+import { ResultModal } from '../../components/ResultModal'
 
 export function Game() {
 
   const {
     plays, points, currentPlayer,
-    handlePlay, resetGame
+    handlePlay, resetGame, winner, gameFinished,
+    resetRound
   } = useContext(GameContext) 
   
+  const [confirmig, setConfirming] = useState(false)
+
+  const navigate = useNavigate()
 
   function handleRestart() {
-    if (!window.confirm('Deseja mesmo acabar o jogo?')) return
-    resetGame()
+    setConfirming(true)
   }
 
   useEffect(resetGame, [])
@@ -37,6 +44,17 @@ export function Game() {
 
   return (
     <Container>
+      <ConfirmModal 
+        show={confirmig} 
+        onClose={() => setConfirming(false)} 
+        onConfirm={resetGame}
+      />
+      <ResultModal
+        isOpen={gameFinished} 
+        winner={winner}
+        onQuit={() => navigate("/")}
+        onNextRound={resetRound}
+      />
       <GameContainer>
         <Header>
           <Logo size={30} />
