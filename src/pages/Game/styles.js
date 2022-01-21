@@ -61,7 +61,8 @@ Header.BackButton = styled.button`
 
 export const GameGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(3, auto);
+  grid-template-columns: repeat(3, 5.8rem);
+  grid-template-rows: repeat(3, 6rem);
   grid-gap: 2rem;
   margin: 2.2rem 0;
 `
