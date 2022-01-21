@@ -7,12 +7,15 @@ import { Router } from './pages/routes'
 import { theme } from './themes/main'
 
 import './global.css'
+import { GameContextProvider } from './contexts/GameContext'
 
 function App() {
   return (
     <ThemeProvider theme={theme}>
       <BrowserRouter>
-        <Router />
+        <GameContextProvider>
+          <Router />
+        </GameContextProvider>
       </BrowserRouter>
     </ThemeProvider>
   )
