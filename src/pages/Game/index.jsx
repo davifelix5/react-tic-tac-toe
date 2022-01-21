@@ -23,7 +23,7 @@ import { ResultModal } from '../../components/ResultModal'
 export function Game() {
 
   const {
-    plays, points, currentPlayer,
+    plays, points, currentPlayer, winningIndexes,
     handlePlay, resetGame, winner, gameFinished,
     resetRound
   } = useContext(GameContext) 
@@ -40,6 +40,8 @@ export function Game() {
 
   const {
     secondaryBackground,
+    darkColorO,
+    darkColorX
   } = useContext(ThemeContext)
 
   return (
@@ -67,7 +69,12 @@ export function Game() {
         </Header>
         <GameGrid>
           {plays.map((play, index) => (
-              <GameGrid.Item key={`${index}_${play}`} onClick={() => handlePlay(index)}>
+              <GameGrid.Item 
+                highlight={winningIndexes.includes(index)} 
+                color={play === 'X' ? darkColorX : darkColorO}
+                key={`${index}_${play}`} 
+                onClick={() => handlePlay(index)}
+              >
                 <Play size={60} type={play} />
               </GameGrid.Item>
           ))}

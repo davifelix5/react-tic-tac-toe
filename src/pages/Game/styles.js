@@ -73,7 +73,7 @@ GameGrid.Item = styled.button`
   justify-content: center;
   padding: 1rem;
   border-radius: 8px;
-  background-color: ${({theme}) => theme.itemBackground};
+  background-color: ${({theme, highlight, color}) => highlight ? color : theme.itemBackground};
   box-shadow: 0 5px ${({theme}) => theme.darkItemBackground};
   &:hover {
     box-shadow: none;

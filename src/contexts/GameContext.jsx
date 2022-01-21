@@ -12,6 +12,7 @@ export function GameContextProvider({ children }) {
   const [firstPlayer, setFirstPlayer] = useState('X')
   const [playMode, setPlayMode] = useState('player') // player || CPU
   const [currentPlayer, setCurrentPlayer] = useState('X')
+  const [winningIndexes, setWinningIndexes] = useState([])
 
   const [gameFinished, setGameFinished] = useState(false)
   const [winner, setWinner] = useState(null) // X or O
@@ -26,7 +27,6 @@ export function GameContextProvider({ children }) {
 
   function tie() {
     setPoints(points => ({...points, ties: points.ties + 1}))
-    resetGame()
   }
 
   function resetGame() {
@@ -55,6 +55,7 @@ export function GameContextProvider({ children }) {
     for (const position of winningPositions) {
       const [a, b, c] = position
       if (plays[a] === plays[b] && plays[b] === plays[c] && plays[a] !== '') {
+        setWinningIndexes(position)
         return plays[a]
       }
     }
@@ -66,6 +67,7 @@ export function GameContextProvider({ children }) {
     setCurrentPlayer('X')
     setGameFinished(false)
     setWinner(null)
+    setWinningIndexes([])
   }
 
   useEffect(() => {
@@ -108,7 +110,7 @@ export function GameContextProvider({ children }) {
 
   return (
     <GameContext.Provider value={{
-      plays, points, currentPlayer,
+      plays, points, currentPlayer, winningIndexes,
       setFirstPlayer, setPlayMode,
       winner, gameFinished,
       handlePlay, resetGame, resetRound
