@@ -71,12 +71,27 @@ export function GameContextProvider({ children }) {
   }
 
   useEffect(() => {
+    const gameOver = plays.filter(Boolean).length === 9
+    const winner = verifyWinner()
     const agaistCpu = playMode === 'CPU'
     const isCPUTurn = currentPlayer !== firstPlayer
     const cpuPlay = agaistCpu && isCPUTurn
-    const gameOver = plays.filter(Boolean).length === 9
     
     const getRandomIndex = () => Math.floor(Math.random() * 9)
+
+    if (winner) {
+      incrementPoints(winner)
+      setWinner(winner)
+      return 
+    } else if (gameOver) {
+      tie()
+      return
+    }
+
+    if (gameOver || winner) {
+      setGameFinished(true)
+      return
+    }
     
     if (cpuPlay) {
       let randomIndex = getRandomIndex()
