@@ -103,7 +103,7 @@ export function GameContextProvider({ children }) {
       handlePlay(randomIndex)
     }
     
-  }, [currentPlayer, playMode, firstPlayer])
+  }, [currentPlayer, playMode, firstPlayer, plays])
 
   return (
     <GameContext.Provider value={{
