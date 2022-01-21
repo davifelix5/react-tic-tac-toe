@@ -82,10 +82,8 @@ export function GameContextProvider({ children }) {
     if (winner) {
       incrementPoints(winner)
       setWinner(winner)
-      return 
     } else if (gameOver) {
       tie()
-      return
     }
 
     if (gameOver || winner) {
