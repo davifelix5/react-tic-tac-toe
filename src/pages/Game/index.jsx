@@ -41,7 +41,8 @@ export function Game() {
   const {
     secondaryBackground,
     darkColorO,
-    darkColorX
+    darkColorX,
+    itemBackground
   } = useContext(ThemeContext)
 
   return (
@@ -68,16 +69,19 @@ export function Game() {
           </Header.BackButton>
         </Header>
         <GameGrid>
-          {plays.map((play, index) => (
-              <GameGrid.Item 
-                highlight={winningIndexes.includes(index)} 
-                color={play === 'X' ? darkColorX : darkColorO}
-                key={`${index}_${play}`} 
-                onClick={() => handlePlay(index)}
-              >
-                <Play size={60} type={play} />
-              </GameGrid.Item>
-          ))}
+          {plays.map((play, index) => {
+              const highlight = winningIndexes.includes(index)
+              return (
+                <GameGrid.Item 
+                  highlight={highlight} 
+                  color={play === 'X' ? darkColorX : darkColorO}
+                  key={`${index}_${play}`} 
+                  onClick={() => handlePlay(index)}
+                >
+                  <Play size={60} type={play} color={highlight ? itemBackground : ''} />
+                </GameGrid.Item>
+              )
+          })}
         </GameGrid>
         <BottomInfo>
           <BottomInfo.Item>
