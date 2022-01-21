@@ -74,13 +74,14 @@ export function GameContextProvider({ children }) {
     const agaistCpu = playMode === 'CPU'
     const isCPUTurn = currentPlayer !== firstPlayer
     const cpuPlay = agaistCpu && isCPUTurn
+    const gameOver = plays.filter(Boolean).length === 9
     
     const getRandomIndex = () => Math.floor(Math.random() * 9)
     
     if (cpuPlay) {
       let randomIndex = getRandomIndex()
 
-      while (plays[randomIndex]) {
+      while (plays[randomIndex] && !gameOver) {
         randomIndex = getRandomIndex()
       }
 
