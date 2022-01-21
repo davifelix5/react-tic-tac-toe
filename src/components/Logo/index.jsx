@@ -12,7 +12,7 @@ export function Logo( { size } ) {
   return (
     <Container>
       <Play type='X' size={size} />
-      <Play type='O' size={size - 5} />
+      <Play type='O' size={size} />
     </Container>
   )
 }

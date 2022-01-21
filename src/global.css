@@ -31,3 +31,9 @@ button {
     font-size: 12px
   }
 }
+
+@media (max-width: 500px) {
+  html {
+    font-size: 10px
+  }
+}
