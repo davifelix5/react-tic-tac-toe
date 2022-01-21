@@ -83,16 +83,15 @@ GameGrid.Item = styled.button`
 `
 
 export const BottomInfo = styled.ul`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 1rem;
 `
 
 BottomInfo.Item = styled.li`
   background-color: ${({theme}) => theme.secondaryBackground};
   padding: 0.4rem 1.5rem;
   border-radius: 8px;
-  width: 30%;
   display: flex;
   flex-direction: column;
   align-items: center;
