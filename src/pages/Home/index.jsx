@@ -38,6 +38,7 @@ export function Home() {
     navigate('/game')
   }
 
+
   return (
     <Container>
       <Main>
