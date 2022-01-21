@@ -26,7 +26,7 @@ export function ConfirmModal({ show, onClose, onConfirm }) {
       shouldCloseOnEsc={true}
       ariaHideApp={false}
     >
-      <Title>Restar Game?</Title>
+      <Title>Restart Game?</Title>
       <ButtonContainer>
         <Button onClick={onClose}>No, cancel</Button>
         <Button onClick={acceptModal}>Yes, restart</Button>

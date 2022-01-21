@@ -41,7 +41,7 @@ export function ResultModal({isOpen, winner, onQuit, onNextRound}) {
       {winner ? (
         <Title color={mainColor}><Icon size={50} /> <span>takes the round</span></Title>
       ) : (
-        <Title color={secondaryBackground}>Houve um empate</Title>
+        <Title color={secondaryBackground}>It was a tie!</Title>
       )}
       <ButtonContainer>
         <Button onClick={onQuit} color={secondaryBackground} darkColor={darkSecondaryBackground}>Quit</Button>
