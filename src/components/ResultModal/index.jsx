@@ -1,9 +1,7 @@
 import React, { useContext } from 'react'
 import Modal from 'react-modal'
 
-import { 
-  ModalContent, 
-  ModalOverlay,
+import {
   ButtonContainer,
   Button,
   Subtitle,
@@ -22,20 +20,50 @@ export function ResultModal({isOpen, winner, onQuit, onNextRound}) {
     secondaryBackground,
     darkSecondaryBackground,
     colorO,
-    darkColorO
+    darkColorO,
+    itemBackground
   } = useContext(ThemeContext)
 
   const mainColor = winner === 'X' ? colorX : colorO
   const buttonColor = winner === 'O' ? colorX : colorO
   const darkColor = winner === 'O' ? darkColorX : darkColorO
   const Icon = winner === 'X' ? FaTimes : FaDotCircle
+
+  // Custom styles for modal
+  const overlay = {
+    'width': '100vw',
+    'height': '100vh',
+    'background-color': 'rgba(0, 0, 0, .3)',
+
+    'display': 'flex',
+    'align-items': 'center',
+    'justify-content': 'center',
+  }
+
+  const content = {
+    'position': 'static',
+    'border': 'none',
+
+    'width': '100vw',
+    'text-transform': 'uppercase',
+
+    'display': 'flex',
+    'flex-direction': 'column',
+    'align-items': 'center',
+    'justify-content': 'center',
+
+    'background-color': itemBackground,
+    'padding': '2rem 0',
+  }
+
   return (
     <Modal 
       isOpen={isOpen}
-      overlayElement={(props, contentElement) => <ModalOverlay>{contentElement}</ModalOverlay>}
-      contentElement={(props, children) => <ModalContent>{children}</ModalContent>}
+      style={{content, overlay}}
       ariaHideApp={false}
-      onRequestClose={onQuit}
+      shouldCloseOnEsc={true}
+      shouldCloseOnOverlayClick={true}
+      onRequestClose={onNextRound}
     >
       <Subtitle color={winner ? secondaryBackground: colorX}>Game Over</Subtitle>
       {winner ? (

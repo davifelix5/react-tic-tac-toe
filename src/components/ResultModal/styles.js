@@ -1,30 +1,5 @@
 import styled from 'styled-components'
 
-export const ModalOverlay = styled.div`
-  position: fixed;
-  top: 0;
-  right: 0;
-
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, .3);
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`
-
-export const ModalContent = styled.div`
-  width: 100vw;
-  text-transform: uppercase;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background-color: ${({theme}) => theme.itemBackground};
-  padding: 2rem 0;
-`
-
 export const Subtitle = styled.h2`
   color: ${(props) => props.color};
   font-size: 0.8rem;

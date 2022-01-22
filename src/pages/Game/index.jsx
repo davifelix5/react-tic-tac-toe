@@ -50,7 +50,7 @@ export function Game() {
       <ConfirmModal 
         show={confirmig} 
         onClose={() => setConfirming(false)} 
-        onConfirm={resetGame}
+        onConfirm={resetRound}
       />
       <ResultModal
         isOpen={gameFinished} 
